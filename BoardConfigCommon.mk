@@ -29,6 +29,16 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01500000
 BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_SOURCE := kernel/samsung/d2
 
+# Dex-Optimizations
+ifeq ($(HOST_OS),linux)
+	ifeq ($(TARGET_BUILD_VARIANT),user)
+		ifeq ($(WITH_DEXPREOPT),)
+			WITH_DEXPREOPT := true
+		endif
+	endif
+endif
+WITH_DEXPREOPT_BOOT_IMG_ONLY ?= true
+
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 BOARD_USES_LEGACY_ALSA_AUDIO := true
